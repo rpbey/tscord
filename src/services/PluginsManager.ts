@@ -1,15 +1,17 @@
 import fs from 'node:fs'
 import { sep } from 'node:path'
 
-import { resolve } from '@discordx/importer'
-import { AnyEntity, EntityClass } from '@mikro-orm/core'
-import { BaseTranslation } from 'typesafe-i18n'
-import { ImportLocaleMapping, storeTranslationsToDisk } from 'typesafe-i18n/importer'
+import { resolve } from '@rpbey/importer'
+import type { AnyEntity, EntityClass } from '@mikro-orm/core'
+import type { BaseTranslation } from 'typesafe-i18n'
+import type { ImportLocaleMapping} from 'typesafe-i18n/importer';
+import { storeTranslationsToDisk } from 'typesafe-i18n/importer'
 
 import { Service } from '@/decorators'
 import { locales } from '@/i18n'
-import { Store } from '@/services'
-import { BaseController, Plugin } from '@/utils/classes'
+import type { Store } from '@/services'
+import type { BaseController} from '@/utils/classes';
+import { Plugin } from '@/utils/classes'
 import { getSourceCodeLocation } from '@/utils/functions'
 
 @Service()
@@ -34,11 +36,11 @@ export class PluginsManager {
 	}
 
 	public getEntities(): EntityClass<AnyEntity>[] {
-		return this._plugins.map(plugin => Object.values(plugin.entities)).flat()
+		return this._plugins.flatMap(plugin => Object.values(plugin.entities))
 	}
 
 	public getControllers(): typeof BaseController[] {
-		return this._plugins.map(plugin => Object.values(plugin.controllers)).flat()
+		return this._plugins.flatMap(plugin => Object.values(plugin.controllers))
 	}
 
 	public async importCommands(): Promise<void> {
@@ -73,7 +75,7 @@ export class PluginsManager {
 
 		for (const locale of locales) {
 			const path = `${getSourceCodeLocation()}/i18n/${locale}`
-			if (fs.existsSync(path))
+			if (await Bun.file(path).exists())
 				translations[locale] = (await import(path))?.default
 		}
 
@@ -100,12 +102,12 @@ export class PluginsManager {
 			})
 		}
 
-		const pluginsName = this._plugins.map(plugin => plugin.name)
+		const pluginsName = new Set(this._plugins.map(plugin => plugin.name))
 
 		for (const path of await resolve(`${getSourceCodeLocation()}/i18n/*/*/index.ts`)) {
 			const name = path.split(sep).at(-2) || ''
 
-			if (!pluginsName.includes(name))
+			if (!pluginsName.has(name))
 				await fs.rmSync(path.slice(0, -8), { recursive: true, force: true })
 		}
 

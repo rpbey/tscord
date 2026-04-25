@@ -1,80 +1,58 @@
-# This dockerfile has multiple stages in order
-# to optimize the build process time and reduce 
-# the final image size.
+# Multi-stage build pour optimiser la taille de l'image finale.
+# Runtime cible : Bun (no Node).
 
 # ============================
 # ==== Dependencies stage ====
 # ============================
-
-FROM node:20.11-alpine as dependencies
+FROM oven/bun:1.3-alpine AS dependencies
 
     WORKDIR /app
 
-    COPY package.json .
-    COPY package-lock.json .
+    COPY package.json bun.lock ./
 
-    # install deps
     RUN apk add --no-cache --virtual .build-deps alpine-sdk python3 && \
-        npm ci --silent && \
+        bun install --frozen-lockfile && \
         apk del .build-deps
 
 # ======================
 # ===== Build stage ====
 # ======================
-
-FROM node:20.11-alpine as builder
+FROM oven/bun:1.3-alpine AS builder
 
     WORKDIR /app
 
-    # copy source files
     COPY src ./src
-    COPY tsconfig.json .
+    COPY tsconfig.json ./
 
-    # copy build files from dependencies stage
-    COPY --from=dependencies /app/package.json .
-    COPY --from=dependencies /app/package-lock.json .
+    COPY --from=dependencies /app/package.json /app/bun.lock /app/
     COPY --from=dependencies /app/node_modules /app/node_modules
 
-    # install plugin dependencies
-    RUN npm run install:plugins
-
-    # build the project
-    RUN npm run build
+    RUN bun run install:plugins
+    RUN bun run build
 
 # ========================
 # ===== Prepare stage ====
 # ========================
-
-FROM node:20.11-alpine as prepare
+FROM oven/bun:1.3-alpine AS prepare
 
     WORKDIR /app
 
-    # copy build files from builder stage
     COPY --from=builder /app/build /app/build
-    COPY --from=builder /app/package.json /app/package.json
-    COPY --from=builder /app/package-lock.json /app/package-lock.json
-    COPY --from=builder /app/node_modules /app/node_modules
+    COPY --from=builder /app/package.json /app/bun.lock /app/
 
-    # purge dev dependencies
-    RUN npm prune --omit=dev
+    RUN bun install --production --frozen-lockfile
 
 # =====================
 # ===== Run stage =====
 # =====================
-
-FROM node:20.11-alpine as runner
+FROM oven/bun:1.3-alpine AS runner
 
     WORKDIR /app
 
-    # set production mode
-    ARG NODE_ENV=production
-    ENV NODE_ENV $NODE_ENV
+    ENV NODE_ENV=production
 
-    # copy build files from prepare stage
     COPY --from=prepare /app/build /app/build
-    COPY --from=prepare /app/package.json /app/package.json
-    COPY --from=prepare /app/package-lock.json /app/package-lock.json
+    COPY --from=prepare /app/package.json /app/
     COPY --from=prepare /app/node_modules /app/node_modules
 
-    # finaly start the bot
-    CMD ["npm", "run", "start"]
+    CMD ["bun", "run", "start"]

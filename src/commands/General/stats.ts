@@ -1,13 +1,11 @@
-import {
-	Pagination,
-	PaginationType,
-} from '@discordx/pagination'
-import { Category } from '@discordx/utilities'
-import { ApplicationCommandOptionType, CommandInteraction, EmbedBuilder, User } from 'discord.js'
-import { Client } from 'discordx'
+import { Pagination } from '@rpbey/pagination'
+import { Category } from '@rpbey/utilities'
+import type { CommandInteraction, User } from 'discord.js';
+import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js'
+import type { Client } from '@rpbey/discordx'
 
 import { Discord, Injectable, Slash, SlashOption } from '@/decorators'
-import { Stats } from '@/services'
+import type { Stats } from '@/services'
 import { getColor } from '@/utils/functions'
 
 const statsResolver: StatsResolverType = [
@@ -76,7 +74,7 @@ export default class StatsCommand {
 				embeds: [embed],
 			})),
 			{
-				type: PaginationType.Button,
+				selectMenu: { disabled: true },
 			}
 		).send()
 	}

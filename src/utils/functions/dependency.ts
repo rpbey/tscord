@@ -1,9 +1,10 @@
-import { F } from 'ts-toolbelt'
-import { container, InjectionToken } from 'tsyringe'
+import type { F } from 'ts-toolbelt'
+import type { InjectionToken } from 'tsyringe';
+import { container } from 'tsyringe'
 
 export async function resolveDependency<T>(token: InjectionToken<T>, interval: number = 500): Promise<T> {
 	while (!container.isRegistered(token, true))
-		await new Promise(resolve => setTimeout(resolve, interval))
+		await Bun.sleep(interval)
 
 	return container.resolve(token)
 }

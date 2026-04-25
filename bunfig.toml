@@ -1,0 +1,30 @@
+# tscord — config Bun
+# https://bun.sh/docs/runtime/bunfig
+
+[install]
+# Lockfile texte v1 (par défaut depuis 1.3)
+saveTextLockfile = true
+
+# Strict workspaces : refuse les versions divergentes entre workspace et catalog
+exact = false
+
+# Cache deps en local (.bun/install)
+registry = "https://registry.npmjs.org/"
+
+[install.scopes]
+"@rpbey" = { url = "https://registry.npmjs.org/" }
+
+[run]
+# Charge automatiquement les .env même hors `bun run`
+auto = true
+
+# Affiche le nom du script avant exécution (DX)
+silent = false
+
+[test]
+# Coverage activé par défaut
+coverage = false
+
+[debug]
+# Stack traces lisibles
+editor = "code"

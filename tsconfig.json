@@ -1,70 +1,73 @@
 {
-	"compilerOptions": {
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
 
-		"target": "es2021",
-		"module": "commonjs",
-		"esModuleInterop": true,
-		"moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
 
-		"outDir": "build",
-		"rootDir": "src",
-		"resolveJsonModule": true,
-		
-		"strict": true,
-		"strictPropertyInitialization": false,
-		"allowSyntheticDefaultImports": true,
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"skipLibCheck": false,
-		"forceConsistentCasingInFileNames": true,
+    "outDir": "build",
+    "rootDir": "src",
 
-		"baseUrl": ".",
-		"paths": {
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
 
-			"@/decorators": ["src/utils/decorators"],
-			"@/decorators/*": ["src/plugins/*/utils/decorators"],
+    "types": ["bun"],
 
-			"@/errors": ["src/utils/errors"],
-			"@/errors/*": ["src/plugins/*/utils/errors"],
+    "baseUrl": "./",
+    "paths": {
+      "@/decorators": ["./src/utils/decorators"],
+      "@/decorators/*": ["./src/plugins/*/utils/decorators"],
 
-			"@/entities": ["src/entities"],
-			"@/entities/*": ["src/plugins/*/entities"],
+      "@/errors": ["./src/utils/errors"],
+      "@/errors/*": ["./src/plugins/*/utils/errors"],
 
-			"@/guards": ["src/guards"],
-			"@/guards/*": ["src/plugins/*/guards"],
-			
-			"@/services": ["src/services"],
-			"@/services/*": ["src/plugins/*/services"],
+      "@/entities": ["./src/entities"],
+      "@/entities/*": ["./src/plugins/*/entities"],
 
-			"@/i18n": ["src/i18n"],
-			"@/i18n/*": ["src/plugins/*/i18n"],
+      "@/guards": ["./src/guards"],
+      "@/guards/*": ["./src/plugins/*/guards"],
 
-			"@/configs": ["src/configs"],
-			"@/configs/*": ["src/plugins/*/configs"],
+      "@/services": ["./src/services"],
+      "@/services/*": ["./src/plugins/*/services"],
 
-			"@/utils/classes": ["src/utils/classes"],
-			"@/utils/classes/*": ["src/plugins/*/utils/classes"],
+      "@/i18n": ["./src/i18n"],
+      "@/i18n/*": ["./src/plugins/*/i18n"],
 
-			"@/utils/functions": ["src/utils/functions"],
-			"@/utils/functions/*": ["src/plugins/*/utils/functions"],
+      "@/configs": ["./src/configs"],
+      "@/configs/*": ["./src/plugins/*/configs"],
 
-			"@/api/controllers": ["src/api/controllers"],
-			"@/api/controllers/*": ["src/plugins/*/api/controllers"],
+      "@/utils/classes": ["./src/utils/classes"],
+      "@/utils/classes/*": ["./src/plugins/*/utils/classes"],
 
-			"@/api/middlewares": ["src/api/middlewares"],
-			"@/api/middlewares/*": ["src/plugins/*/api/middlewares"],
+      "@/utils/functions": ["./src/utils/functions"],
+      "@/utils/functions/*": ["./src/plugins/*/utils/functions"],
 
-			"@/api/server": ["src/api/server.ts"],
+      "@/api/controllers": ["./src/api/controllers"],
+      "@/api/controllers/*": ["./src/plugins/*/api/controllers"],
 
-			"@/env": ["src/utils/types/environment.ts"]
-		}
-	},
+      "@/api/middlewares": ["./src/api/middlewares"],
+      "@/api/middlewares/*": ["./src/plugins/*/api/middlewares"],
 
-	"include": ["src", "**/*.ts", "src/**/*.json"],
-	"exclude": ["build", "node_modules", "tests", "mikro-orm.config.ts", "package.json"],
-	"paths": ["node_modules/*", "src/utils/types/*", "src/plugins/*/utils/types/*"],
+      "@/api/server": ["./src/api/server.ts"],
 
-	"ts-node": {
-		"require": ["tsconfig-paths/register"]
-	}
+      "@/env": ["./src/utils/types/environment.ts"]
+    }
+  },
+
+  "include": ["src", "**/*.ts", "src/**/*.json"],
+  "exclude": [
+    "build",
+    "node_modules",
+    "tests",
+    "mikro-orm.config.ts",
+    "package.json"
+  ]
 }

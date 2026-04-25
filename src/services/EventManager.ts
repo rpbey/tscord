@@ -1,5 +1,5 @@
 import { Service } from '@/decorators'
-import { Logger } from '@/services'
+import type { Logger } from '@/services'
 
 @Service()
 export class EventManager {

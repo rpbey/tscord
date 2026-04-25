@@ -1,4 +1,4 @@
-import { CronJob } from 'cron'
+import type { CronJob } from 'cron'
 
 import { Service } from '@/decorators'
 

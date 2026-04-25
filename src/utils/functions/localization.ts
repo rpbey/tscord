@@ -1,5 +1,6 @@
 import { generalConfig } from '@/configs'
-import { L, loadedLocales, Locales, locales } from '@/i18n'
+import type { Locales} from '@/i18n';
+import { L, loadedLocales, locales } from '@/i18n'
 
 export function getLocalizedInfo(target: 'NAME' | 'DESCRIPTION', localizationSource: TranslationsNestedPaths) {
 	const localizations = Object.fromEntries(

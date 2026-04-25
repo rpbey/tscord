@@ -1,4 +1,5 @@
-import { Context, Middleware, PlatformContext } from '@tsed/common'
+import type { PlatformContext } from '@tsed/common';
+import { Context, Middleware } from '@tsed/common'
 import { BadRequest, Unauthorized } from '@tsed/exceptions'
 import DiscordOauth2 from 'discord-oauth2'
 
@@ -47,8 +48,8 @@ export class DevAuthenticated {
 		// if (!token.match(fmaTokenRegex) && !token.match(nonFmaTokenRegex)) return ctx.throw(400, 'Invalid token')
 
 		// directly skip the middleware if the token is already in the store, which is used here as a "cache"
-		const authorizedAPITokens = this.store.get('authorizedAPITokens')
-		if (authorizedAPITokens.includes(token))
+		const cachedTokens = this.store.get('authorizedAPITokens')
+		if (cachedTokens.includes(token))
 			return
 
 		// we get the user's profile from the token using the `discord-oauth2` package
@@ -58,14 +59,14 @@ export class DevAuthenticated {
 			// check if logged user is a dev (= admin) of the bot
 			if (isDev(user.id)) {
 				// we add the token to the store and set a timeout to remove it after 10 minutes
-				this.store.update('authorizedAPITokens', authorizedAPITokens => [...authorizedAPITokens, token])
+				this.store.update('authorizedAPITokens', tokens => [...tokens, token])
 				setTimeout(() => {
-					this.store.update('authorizedAPITokens', authorizedAPITokens => authorizedAPITokens.filter(t => t !== token))
+					this.store.update('authorizedAPITokens', tokens => tokens.filter(t => t !== token))
 				}, timeout)
 			} else {
 				throw new Unauthorized('Unauthorized')
 			}
-		} catch (err) {
+		} catch {
 			throw new BadRequest('Invalid discord token')
 		}
 	}

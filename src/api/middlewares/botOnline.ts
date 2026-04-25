@@ -1,6 +1,6 @@
 import { Middleware } from '@tsed/common'
 import { InternalServerError } from '@tsed/exceptions'
-import { Client } from 'discordx'
+import { Client } from '@rpbey/discordx'
 
 import { resolveDependencies } from '@/utils/functions'
 

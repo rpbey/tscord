@@ -1,5 +1,5 @@
 import { RequestContext } from '@mikro-orm/core'
-import { GuardFunction } from 'discordx'
+import type { GuardFunction } from '@rpbey/discordx'
 
 import { Database } from '@/services'
 import { resolveDependency } from '@/utils/functions'

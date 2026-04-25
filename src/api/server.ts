@@ -1,7 +1,9 @@
 import '@tsed/swagger'
 
-import { CreateRequestContext, MikroORM } from '@mikro-orm/core'
-import { Inject, PlatformAcceptMimesMiddleware, PlatformApplication } from '@tsed/common'
+import type { MikroORM } from '@mikro-orm/core';
+import { CreateRequestContext } from '@mikro-orm/core'
+import type { PlatformApplication } from '@tsed/common';
+import { Inject, PlatformAcceptMimesMiddleware } from '@tsed/common'
 import { PlatformExpress } from '@tsed/platform-express'
 import bodyParser from 'body-parser'
 
@@ -9,7 +11,7 @@ import * as controllers from '@/api/controllers'
 import { Log } from '@/api/middlewares'
 import { Service } from '@/decorators'
 import { env } from '@/env'
-import { Database, PluginsManager, Store } from '@/services'
+import type { Database, PluginsManager, Store } from '@/services'
 
 @Service()
 export class Server {

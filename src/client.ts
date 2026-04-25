@@ -1,5 +1,5 @@
 import { GatewayIntentBits, Partials } from 'discord.js'
-import { ClientOptions } from 'discordx'
+import type { ClientOptions } from '@rpbey/discordx'
 
 import { generalConfig, logsConfig } from '@/configs'
 import { env } from '@/env'

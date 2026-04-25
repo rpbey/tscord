@@ -1,8 +1,9 @@
 import process from 'node:process'
 
-import { EntityRepository } from '@mikro-orm/core'
+import type { EntityRepository } from '@mikro-orm/core'
 import { constant } from 'case'
-import { Client, SimpleCommandMessage } from 'discordx'
+import type { SimpleCommandMessage } from '@rpbey/discordx';
+import { Client } from '@rpbey/discordx'
 import osu from 'node-os-utils'
 import pidusage from 'pidusage'
 import { delay, inject } from 'tsyringe'
@@ -10,7 +11,7 @@ import { delay, inject } from 'tsyringe'
 import { statsConfig } from '@/configs'
 import { Schedule, Service } from '@/decorators'
 import { Guild, Stat, User } from '@/entities'
-import { Database } from '@/services'
+import type { Database } from '@/services'
 import { datejs, formatDate, getTypeOfInteraction, resolveAction, resolveChannel, resolveGuild, resolveUser } from '@/utils/functions'
 
 const allInteractions = {
@@ -138,7 +139,7 @@ export class Stats {
 
 			const slashCommands = await query.execute()
 
-			return slashCommands.sort((a: any, b: any) => b.count - a.count)
+			return slashCommands.toSorted((a: any, b: any) => b.count - a.count)
 		} else if ('aggregate' in this.db.em) {
 			// @ts-expect-error
 			const slashCommands = await this.db.em.aggregate(Stat, [
@@ -163,7 +164,7 @@ export class Stats {
 				},
 			])
 
-			return slashCommands.sort((a: any, b: any) => b.count - a.count)
+			return slashCommands.toSorted((a: any, b: any) => b.count - a.count)
 		} else {
 			return []
 		}
@@ -236,7 +237,7 @@ export class Stats {
 			})
 		}
 
-		return topGuilds.sort((a, b) => b.totalCommands - a.totalCommands)
+		return topGuilds.toSorted((a, b) => b.totalCommands - a.totalCommands)
 	}
 
 	/**
@@ -267,7 +268,7 @@ export class Stats {
 	 */
 	cumulateStatPerInterval(stats: StatPerInterval): StatPerInterval {
 		const cumulatedStats = stats
-			.reverse()
+			.toReversed()
 			.reduce((acc, stat, i) => {
 				if (acc.length === 0) {
 					acc.push(stat)
@@ -280,7 +281,7 @@ export class Stats {
 
 				return acc
 			}, [] as StatPerInterval)
-			.reverse()
+			.toReversed()
 
 		return cumulatedStats
 	}
@@ -292,9 +293,9 @@ export class Stats {
 	 */
 	sumStats(stats1: StatPerInterval, stats2: StatPerInterval): StatPerInterval {
 		const allDays = [...new Set(stats1.concat(stats2).map(stat => stat.date))]
-			.sort((a, b) => {
-				const aa = a.split('/').reverse().join()
-				const bb = b.split('/').reverse().join()
+			.toSorted((a, b) => {
+				const aa = a.split('/').toReversed().join()
+				const bb = b.split('/').toReversed().join()
 
 				return aa < bb ? -1 : (aa > bb ? 1 : 0)
 			})

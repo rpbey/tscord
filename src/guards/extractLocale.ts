@@ -1,5 +1,7 @@
-import { ButtonInteraction, CommandInteraction, ContextMenuCommandInteraction, Interaction, StringSelectMenuInteraction } from 'discord.js'
-import { GuardFunction, SimpleCommandMessage } from 'discordx'
+import type { Interaction} from 'discord.js';
+import { ButtonInteraction, CommandInteraction, ContextMenuCommandInteraction, StringSelectMenuInteraction } from 'discord.js'
+import type { GuardFunction} from '@rpbey/discordx';
+import { SimpleCommandMessage } from '@rpbey/discordx'
 
 import { getLocaleFromInteraction, L } from '@/i18n'
 

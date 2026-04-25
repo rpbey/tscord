@@ -1,4 +1,5 @@
-import { Context, Middleware, PlatformContext } from '@tsed/common'
+import type { PlatformContext } from '@tsed/common';
+import { Context, Middleware } from '@tsed/common'
 import chalk from 'chalk'
 
 import { Logger } from '@/services'

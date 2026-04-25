@@ -1,13 +1,14 @@
-import { Category } from '@discordx/utilities'
-import { ApplicationCommandOptionType, CommandInteraction } from 'discord.js'
-import { Client } from 'discordx'
+import { Category } from '@rpbey/utilities'
+import type { CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionType } from 'discord.js'
+import type { Client } from '@rpbey/discordx'
 
 import { generalConfig } from '@/configs'
 import { Discord, Injectable, Slash, SlashOption } from '@/decorators'
 import { Guild } from '@/entities'
 import { UnknownReplyError } from '@/errors'
 import { Guard, UserPermissions } from '@/guards'
-import { Database } from '@/services'
+import type { Database } from '@/services'
 import { resolveGuild, simpleSuccessEmbed } from '@/utils/functions'
 
 @Discord()

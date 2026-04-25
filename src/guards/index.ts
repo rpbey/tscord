@@ -1,5 +1,5 @@
-export { Guard } from 'discordx'
-export { RateLimit, PermissionGuard as UserPermissions } from '@discordx/utilities'
+export { Guard } from '@rpbey/discordx'
+export { RateLimit, PermissionGuard as UserPermissions } from '@rpbey/utilities'
 
 export * from './disabled'
 export * from './guildOnly'

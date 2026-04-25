@@ -1,5 +1,6 @@
-import { CommandInteraction, TextChannel } from 'discord.js'
-import { GuardFunction, SimpleCommandMessage } from 'discordx'
+import type { CommandInteraction} from 'discord.js';
+import { TextChannel } from 'discord.js'
+import type { GuardFunction, SimpleCommandMessage } from '@rpbey/discordx'
 
 import { getLocaleFromInteraction, L } from '@/i18n'
 import { replyToInteraction, resolveChannel } from '@/utils/functions'

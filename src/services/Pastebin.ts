@@ -1,9 +1,10 @@
 import dayjs from 'dayjs'
-import { Paste, RentryClient } from 'rentry-pastebin'
+import type { Paste} from 'rentry-pastebin';
+import { RentryClient } from 'rentry-pastebin'
 
 import { Schedule, Service } from '@/decorators'
 import { Pastebin as PastebinEntity } from '@/entities'
-import { Database } from '@/services'
+import type { Database } from '@/services'
 
 @Service()
 export class Pastebin {
@@ -18,7 +19,7 @@ export class Pastebin {
 
 	private async waitForToken(): Promise<void> {
 		while (!this.client.getToken())
-			await new Promise(resolve => setTimeout(resolve, 100))
+			await Bun.sleep(100)
 	}
 
 	async createPaste(content: string, lifetime?: number): Promise<Paste | undefined> {

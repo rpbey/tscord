@@ -1,4 +1,5 @@
-import { CommandInteraction, EmbedBuilder } from 'discord.js'
+import type { CommandInteraction} from 'discord.js';
+import { EmbedBuilder } from 'discord.js'
 
 import { replyToInteraction } from '@/utils/functions'
 

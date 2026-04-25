@@ -1,4 +1,5 @@
-import { DOn, EventOptions, MetadataStorage, MethodDecoratorEx } from 'discordx'
+import type { EventOptions, MethodDecoratorEx } from '@rpbey/discordx';
+import { DOn, MetadataStorage } from '@rpbey/discordx'
 
 /**
  * Handle both discord and custom events with a defined handler

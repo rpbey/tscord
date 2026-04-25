@@ -1,5 +1,5 @@
 import { ApplicationCommandType } from 'discord.js'
-import { ContextMenu as ContextMenuX } from 'discordx'
+import { ContextMenu as ContextMenuX } from '@rpbey/discordx'
 
 import { constantPreserveDots, getCallerFile, sanitizeLocales, setOptionsLocalization } from '@/utils/functions'
 

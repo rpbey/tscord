@@ -1,5 +1,5 @@
-import { User as DUser } from 'discord.js'
-import { Client } from 'discordx'
+import type { User as DUser } from 'discord.js'
+import type { Client } from '@rpbey/discordx'
 
 import { Guild, User } from '@/entities'
 import { Database, Logger, Stats } from '@/services'

@@ -1,5 +1,6 @@
-import { ApplicationCommandOptionType, CommandInteraction } from 'discord.js'
-import { Client } from 'discordx'
+import type { CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionType } from 'discord.js'
+import type { Client } from '@rpbey/discordx'
 
 import { Discord, Guard, Slash, SlashOption } from '@/decorators'
 import { Disabled } from '@/guards'
