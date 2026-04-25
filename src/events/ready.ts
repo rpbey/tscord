@@ -1,5 +1,5 @@
 import { ActivityType } from 'discord.js'
-import { Client } from 'discordx'
+import { Client } from '@rpbey/discordx'
 
 import { generalConfig } from '@/configs'
 import { Discord, Injectable, Once, Schedule } from '@/decorators'

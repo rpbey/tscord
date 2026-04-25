@@ -15,20 +15,20 @@ type SanitizedOptions = {
 type Sanitization<K> = Modify<K, SanitizedOptions>
 
 type ApplicationCommandOptions = Sanitization<
-    WithOptional<import('discordx').ApplicationCommandOptions<string, string>, 'description'>
+    WithOptional<import('@rpbey/discordx').ApplicationCommandOptions<string, string>, 'description'>
 >
 
 type SlashGroupOptions = Sanitization<
-    WithOptional<import('discordx').SlashGroupOptions<string, string, string>, 'description'>
+    WithOptional<import('@rpbey/discordx').SlashGroupOptions<string, string, string>, 'description'>
 >
 
 type SlashOptionOptions = Sanitization<
-    WithOptional<import('discordx').SlashOptionOptions<string, string>, 'description'>
+    WithOptional<import('@rpbey/discordx').SlashOptionOptions<string, string>, 'description'>
 >
 
-type SlashChoiceOption = Modify<import('discordx').SlashChoiceType<string, string | number>, SanitizedOptions>
+type SlashChoiceOption = Modify<import('@rpbey/discordx').SlashChoiceType<string, string | number>, SanitizedOptions>
 
-type ContextMenuOptionsX = Omit<import('discordx').ApplicationCommandOptions<import('discordx').NotEmpty<string>, string> & {
+type ContextMenuOptionsX = Omit<import('@rpbey/discordx').ApplicationCommandOptions<import('@rpbey/discordx').NotEmpty<string>, string> & {
 	type: Exclude<import('discord.js').ApplicationCommandType, import('discord.js').ApplicationCommandType.ChatInput>
 }, 'description' | 'descriptionLocalizations'>
 

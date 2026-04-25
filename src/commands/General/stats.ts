@@ -1,10 +1,7 @@
-import {
-	Pagination,
-	PaginationType,
-} from '@discordx/pagination'
-import { Category } from '@discordx/utilities'
+import { Pagination } from '@rpbey/pagination'
+import { Category } from '@rpbey/utilities'
 import { ApplicationCommandOptionType, CommandInteraction, EmbedBuilder, User } from 'discord.js'
-import { Client } from 'discordx'
+import { Client } from '@rpbey/discordx'
 
 import { Discord, Injectable, Slash, SlashOption } from '@/decorators'
 import { Stats } from '@/services'
@@ -76,7 +73,7 @@ export default class StatsCommand {
 				embeds: [embed],
 			})),
 			{
-				type: PaginationType.Button,
+				selectMenu: { disabled: true },
 			}
 		).send()
 	}

@@ -1,6 +1,6 @@
-import { Category } from '@discordx/utilities'
+import { Category } from '@rpbey/utilities'
 import { ApplicationCommandOptionType, CommandInteraction } from 'discord.js'
-import { Client } from 'discordx'
+import { Client } from '@rpbey/discordx'
 
 import { generalConfig } from '@/configs'
 import { Discord, Injectable, Slash, SlashOption } from '@/decorators'

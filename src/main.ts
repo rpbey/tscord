@@ -3,12 +3,12 @@ import 'dotenv/config'
 
 import process from 'node:process'
 
-import { resolve } from '@discordx/importer'
+import { resolve } from '@rpbey/importer'
 import { RequestContext } from '@mikro-orm/core'
 import chalk from 'chalk'
 import chokidar from 'chokidar'
 import discordLogs from 'discord-logs'
-import { Client, DIService, MetadataStorage, tsyringeDependencyRegistryEngine } from 'discordx'
+import { Client, DIService, MetadataStorage, tsyringeDependencyRegistryEngine } from '@rpbey/discordx'
 import { container } from 'tsyringe'
 import { constructor } from 'tsyringe/dist/typings/types'
 

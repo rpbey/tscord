@@ -8,7 +8,7 @@ export {
 	SelectMenuComponent,
 	SimpleCommand,
 	SimpleCommandOption,
-} from 'discordx'
+} from '@rpbey/discordx'
 
 export * from './On'
 export * from './Once'

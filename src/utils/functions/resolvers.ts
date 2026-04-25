@@ -11,7 +11,7 @@ import {
 	StringSelectMenuInteraction,
 	VoiceState,
 } from 'discord.js'
-import { SimpleCommandMessage } from 'discordx'
+import { SimpleCommandMessage } from '@rpbey/discordx'
 
 import packageJson from '../../../package.json'
 

@@ -1,6 +1,6 @@
-import { Category } from '@discordx/utilities'
+import { Category } from '@rpbey/utilities'
 import { CommandInteraction, EmbedBuilder } from 'discord.js'
-import { Client } from 'discordx'
+import { Client } from '@rpbey/discordx'
 
 import { generalConfig } from '@/configs'
 import { Discord, Slash } from '@/decorators'

@@ -1,5 +1,5 @@
 import { CommandInteraction } from 'discord.js'
-import { ArgsOf, Client } from 'discordx'
+import { ArgsOf, Client } from '@rpbey/discordx'
 
 import { generalConfig } from '@/configs'
 import { Discord, Guard, Injectable, On } from '@/decorators'

@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import { sep } from 'node:path'
 
-import { resolve } from '@discordx/importer'
+import { resolve } from '@rpbey/importer'
 import { AnyEntity, EntityClass } from '@mikro-orm/core'
 import { BaseTranslation } from 'typesafe-i18n'
 import { ImportLocaleMapping, storeTranslationsToDisk } from 'typesafe-i18n/importer'
@@ -73,7 +73,7 @@ export class PluginsManager {
 
 		for (const locale of locales) {
 			const path = `${getSourceCodeLocation()}/i18n/${locale}`
-			if (fs.existsSync(path))
+			if (await Bun.file(path).exists())
 				translations[locale] = (await import(path))?.default
 		}
 

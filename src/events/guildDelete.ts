@@ -1,4 +1,4 @@
-import { ArgsOf, Client } from 'discordx'
+import { ArgsOf, Client } from '@rpbey/discordx'
 
 import { Discord, On } from '@/decorators'
 import { syncGuild } from '@/utils/functions'

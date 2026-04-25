@@ -1,4 +1,4 @@
-import { ClassDecoratorEx, ClassMethodDecorator, SlashGroup as SlashGroupX, SlashGroupOptions as SlashGroupOptionsX, VerifyName } from 'discordx'
+import { ClassDecoratorEx, ClassMethodDecorator, SlashGroup as SlashGroupX, SlashGroupOptions as SlashGroupOptionsX, VerifyName } from '@rpbey/discordx'
 
 import { constantPreserveDots, sanitizeLocales, setFallbackDescription, setOptionsLocalization } from '@/utils/functions'
 

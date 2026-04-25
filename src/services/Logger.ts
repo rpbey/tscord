@@ -8,7 +8,7 @@ import { constant } from 'case'
 import chalk from 'chalk'
 import dayjs from 'dayjs'
 import { BaseMessageOptions, TextChannel, ThreadChannel, User } from 'discord.js'
-import { Client, MetadataStorage } from 'discordx'
+import { Client, MetadataStorage } from '@rpbey/discordx'
 import ora from 'ora'
 import { parse, StackFrame } from 'stacktrace-parser'
 import { delay, inject } from 'tsyringe'
@@ -205,7 +205,7 @@ export class Logger {
 
 		for (const logPath of currentLogsPaths) {
 			// empty the file
-			fs.writeFileSync(`${this.logPath}/${logPath}`, '')
+			await Bun.write(`${this.logPath}/${logPath}`, '')
 		}
 	}
 

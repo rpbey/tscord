@@ -1,6 +1,6 @@
-import { Category } from '@discordx/utilities'
+import { Category } from '@rpbey/utilities'
 import { ActionRowBuilder, APISelectMenuOption, CommandInteraction, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuInteraction } from 'discord.js'
-import { Client, MetadataStorage, SelectMenuComponent } from 'discordx'
+import { Client, MetadataStorage, SelectMenuComponent } from '@rpbey/discordx'
 import { TranslationFunctions } from 'src/i18n/i18n-types'
 
 import { Discord, Slash } from '@/decorators'

@@ -2,7 +2,7 @@ import { BodyParams, Controller, Delete, Get, PathParams, Post, UseBefore } from
 import { NotFound, Unauthorized } from '@tsed/exceptions'
 import { Required } from '@tsed/schema'
 import { BaseGuildTextChannel, BaseGuildVoiceChannel, ChannelType, NewsChannel, PermissionsBitField } from 'discord.js'
-import { Client, MetadataStorage } from 'discordx'
+import { Client, MetadataStorage } from '@rpbey/discordx'
 
 import { BotOnline, DevAuthenticated } from '@/api/middlewares'
 import { generalConfig } from '@/configs'

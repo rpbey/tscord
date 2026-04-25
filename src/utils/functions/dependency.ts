@@ -3,7 +3,7 @@ import { container, InjectionToken } from 'tsyringe'
 
 export async function resolveDependency<T>(token: InjectionToken<T>, interval: number = 500): Promise<T> {
 	while (!container.isRegistered(token, true))
-		await new Promise(resolve => setTimeout(resolve, interval))
+		await Bun.sleep(interval)
 
 	return container.resolve(token)
 }

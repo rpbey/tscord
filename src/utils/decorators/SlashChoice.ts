@@ -1,4 +1,4 @@
-import { SlashChoice as SlashChoiceX } from 'discordx'
+import { SlashChoice as SlashChoiceX } from '@rpbey/discordx'
 
 import { constantPreserveDots, sanitizeLocales, setOptionsLocalization } from '@/utils/functions'
 

@@ -18,7 +18,7 @@ export class Pastebin {
 
 	private async waitForToken(): Promise<void> {
 		while (!this.client.getToken())
-			await new Promise(resolve => setTimeout(resolve, 100))
+			await Bun.sleep(100)
 	}
 
 	async createPaste(content: string, lifetime?: number): Promise<Paste | undefined> {
