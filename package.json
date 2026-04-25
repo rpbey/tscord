@@ -1,7 +1,7 @@
 {
   "name": "tscord",
   "version": "1.0.0",
-  "description": "A fully-featured discord bot template written in Typescript, intended to provide a framework that's easy to use, extend and modify",
+  "description": "Bun-first fork of TSCord — fully-featured Discord bot template (TypeScript + @rpbey/discordy + mikro-orm)",
   "license": "MIT",
   "private": true,
   "main": "build/main.js",
