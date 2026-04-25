@@ -24,8 +24,10 @@
     "migration:down": "NODE_ENV=development SKIP_SCHEDULE=1 bunx mikro-orm migration:down",
     "plugins:install": "installoop --rootDir=./src/plugins",
     "postinstall": "bun run plugins:install",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "oxlint --config .oxlintrc.json --type-aware src",
+    "lint:fix": "oxlint --config .oxlintrc.json --fix src",
+    "lint:fast": "oxlint --config .oxlintrc.json src",
+    "lint:eslint": "eslint ."
   },
   "dependencies": {
     "@rpbey/importer": "workspace:*",
@@ -96,6 +98,8 @@
     "@types/swagger-ui-express": "~4.1.8",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "ncp": "~2.0.0",
+    "oxlint": "^1.61.0",
+    "oxlint-tsgolint": "^0.22.0",
     "plop": "^2.7.6",
     "tsc-alias": "~1.8.16",
     "tsconfig-paths": "~4.2.0",
