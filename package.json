@@ -1,10 +1,43 @@
 {
-  "name": "tscord",
-  "version": "1.0.0",
+  "name": "@rpbey/tscord",
+  "version": "3.0.0",
   "description": "Bun-first fork of TSCord — fully-featured Discord bot template (TypeScript + @rpbey/discordy + mikro-orm)",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "main": "build/main.js",
+  "homepage": "https://github.com/rpbey/tscord",
+  "bugs": "https://github.com/rpbey/tscord/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpbey/tscord.git"
+  },
+  "keywords": [
+    "discord",
+    "discord-bot",
+    "template",
+    "bun",
+    "typescript",
+    "discordx",
+    "rpbey",
+    "mikro-orm",
+    "tscord"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "src",
+    "assets",
+    "database",
+    "tsconfig.json",
+    "bunfig.toml",
+    ".env.example",
+    "mikro-orm.config.ts",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "tscord": {
     "version": "2.4"
   },
