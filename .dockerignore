@@ -1,0 +1,35 @@
+# node_modules est rebuilt dans le Dockerfile
+node_modules
+build
+.git
+.github
+
+# Lockfiles d'autres gestionnaires (on garde uniquement bun.lock)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Env (les secrets sont injectés au runtime via Docker)
+.env
+.env.*
+!.env.example
+.credentials.json
+
+# IDE / OS
+.vscode
+.idea
+.DS_Store
+*.swp
+
+# Logs / data persistants
+logs
+*.log
+data
+sqlite.db
+sqlite.db-*
+
+# Tests / docs
+tests
+docs
+*.md
+!README.md
