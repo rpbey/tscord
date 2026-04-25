@@ -1,6 +1,7 @@
 import { CronJob } from 'cron'
 import { isValidCron } from 'cron-validator'
-import { container, InjectionToken } from 'tsyringe'
+import type { InjectionToken } from 'tsyringe';
+import { container } from 'tsyringe'
 
 import { generalConfig } from '@/configs'
 import { resolveDependency } from '@/utils/functions'

@@ -1,7 +1,8 @@
 import { BodyParams, Controller, Delete, Get, PathParams, Post, UseBefore } from '@tsed/common'
 import { NotFound, Unauthorized } from '@tsed/exceptions'
 import { Required } from '@tsed/schema'
-import { BaseGuildTextChannel, BaseGuildVoiceChannel, ChannelType, NewsChannel, PermissionsBitField } from 'discord.js'
+import type { BaseGuildTextChannel, BaseGuildVoiceChannel, NewsChannel} from 'discord.js';
+import { ChannelType, PermissionsBitField } from 'discord.js'
 import { Client, MetadataStorage } from '@rpbey/discordx'
 
 import { BotOnline, DevAuthenticated } from '@/api/middlewares'

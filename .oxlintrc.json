@@ -26,6 +26,7 @@
     "build/",
     "node_modules/",
     "src/i18n/i18n-*.ts",
+    "src/utils/types/**/*.d.ts",
     "src/plugins/*/dist/",
     "*.cjs",
     "*.mjs"
@@ -34,7 +35,7 @@
     "typescript/no-floating-promises": ["error", { "ignoreVoid": true }],
     "typescript/no-misused-promises": "error",
     "typescript/await-thenable": "error",
-    "typescript/no-explicit-any": "warn",
+    "typescript/no-explicit-any": "off",
     "typescript/consistent-type-imports": [
       "warn",
       { "prefer": "type-imports" }
@@ -44,9 +45,13 @@
       "warn",
       { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
     ],
+    "no-await-in-loop": "off",
     "no-console": "off",
     "no-debugger": "error",
     "no-eval": "error",
+    "no-shadow": "warn",
+    "no-unassigned-import": "off",
+    "no-extraneous-class": "off",
     "no-var": "error",
     "prefer-const": "warn",
     "eqeqeq": ["warn", "smart"],

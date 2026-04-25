@@ -1,9 +1,10 @@
 import dayjs from 'dayjs'
-import { Paste, RentryClient } from 'rentry-pastebin'
+import type { Paste} from 'rentry-pastebin';
+import { RentryClient } from 'rentry-pastebin'
 
 import { Schedule, Service } from '@/decorators'
 import { Pastebin as PastebinEntity } from '@/entities'
-import { Database } from '@/services'
+import type { Database } from '@/services'
 
 @Service()
 export class Pastebin {

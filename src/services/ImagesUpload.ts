@@ -8,9 +8,10 @@ import { imageHash as callbackImageHash } from "image-hash";
 import { ImgurClient } from "imgur";
 
 import { Service } from "@/decorators";
-import { Image, ImageRepository } from "@/entities";
+import type { ImageRepository } from "@/entities";
+import { Image } from "@/entities";
 import { env } from "@/env";
-import { Database, Logger } from "@/services";
+import type { Database, Logger } from "@/services";
 import { base64Encode, fileOrDirectoryExists, getFiles } from "@/utils/functions";
 
 const imageHasher = promisify(callbackImageHash);

@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 
-import { EntityName, MikroORM, Options } from '@mikro-orm/core'
+import type { EntityName, Options } from '@mikro-orm/core';
+import { MikroORM } from '@mikro-orm/core'
 import fastFolderSizeSync from 'fast-folder-size/sync'
 import { backup, restore } from 'saveqlite'
 import { delay, inject } from 'tsyringe'

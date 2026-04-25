@@ -1,5 +1,6 @@
 import { of } from 'case'
-import { SlashOption as SlashOptionX, SlashOptionOptions as SlashOptionOptionsX, VerifyName } from '@rpbey/discordx'
+import type { SlashOptionOptions as SlashOptionOptionsX, VerifyName } from '@rpbey/discordx';
+import { SlashOption as SlashOptionX } from '@rpbey/discordx'
 
 import { InvalidOptionName } from '@/errors'
 import { constantPreserveDots, sanitizeLocales, setFallbackDescription, setOptionsLocalization } from '@/utils/functions'

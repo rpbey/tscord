@@ -1,9 +1,10 @@
-import { ArgsOf, Client, Guard, SimpleCommandMessage } from "@rpbey/discordx";
+import type { ArgsOf, Client} from "@rpbey/discordx";
+import { Guard, SimpleCommandMessage } from "@rpbey/discordx";
 
 import { Discord, Injectable, On, OnCustom } from "@/decorators";
 import { Guild, User } from "@/entities";
 import { Maintenance } from "@/guards";
-import { Database, EventManager, Logger, Stats } from "@/services";
+import type { Database, EventManager, Logger, Stats } from "@/services";
 import { syncUser } from "@/utils/functions";
 
 @Discord()

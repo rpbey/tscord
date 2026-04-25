@@ -7,10 +7,12 @@ import boxen from 'boxen'
 import { constant } from 'case'
 import chalk from 'chalk'
 import dayjs from 'dayjs'
-import { BaseMessageOptions, TextChannel, ThreadChannel, User } from 'discord.js'
+import type { BaseMessageOptions, User } from 'discord.js';
+import { TextChannel, ThreadChannel } from 'discord.js'
 import { Client, MetadataStorage } from '@rpbey/discordx'
 import ora from 'ora'
-import { parse, StackFrame } from 'stacktrace-parser'
+import type { StackFrame } from 'stacktrace-parser';
+import { parse } from 'stacktrace-parser'
 import { delay, inject } from 'tsyringe'
 
 import * as controllers from '@/api/controllers'
@@ -384,7 +386,7 @@ export class Logger {
 	 * @param type NEW_GUILD, DELETE_GUILD, RECOVER_GUILD
 	 * @param guildId
 	 */
-	logGuild(type: 'NEW_GUILD' | 'DELETE_GUILD' | 'RECOVER_GUILD', guildId: string) {
+	async logGuild(type: 'NEW_GUILD' | 'DELETE_GUILD' | 'RECOVER_GUILD', guildId: string) {
 		const additionalMessage
 			= type === 'NEW_GUILD'
 				? 'has been added to the db'
@@ -392,7 +394,8 @@ export class Logger {
 					? 'has been deleted'
 					: type === 'RECOVER_GUILD' ? 'has been recovered' : ''
 
-		resolveDependency(Client).then(async (client) => {
+		const client = await resolveDependency(Client)
+		{
 			const guild = await client.guilds.fetch(guildId).catch(() => null)
 
 			const message = `(${type}) Guild ${guild ? `${guild.name} (${guildId})` : guildId} ${additionalMessage}`
@@ -431,7 +434,7 @@ export class Logger {
 					}],
 				})
 			}
-		})
+		}
 	}
 
 	/**
@@ -448,7 +451,7 @@ export class Logger {
 
 		if (trace && trace[0]) {
 			message += ` ${type === 'Exception' ? 'Exception' : 'Unhandled rejection'} : ${error.message}\n${trace.map((frame: StackFrame) => `\t> ${frame.file}:${frame.lineNumber}`).join('\n')}`
-			embedMessage += `\`\`\`\n${trace.map((frame: StackFrame) => `\> ${frame.file}:${frame.lineNumber}`).join('\n')}\n\`\`\``
+			embedMessage += `\`\`\`\n${trace.map((frame: StackFrame) => `> ${frame.file}:${frame.lineNumber}`).join('\n')}\n\`\`\``
 			embedTitle += `***${type === 'Exception' ? 'Exception' : 'Unhandled rejection'}* : ${error.message}**`
 			chalkedMessage += ` ${chalk.dim.italic.gray(type === 'Exception' ? 'Exception' : 'Unhandled rejection')} : ${error.message}\n${chalk.dim.italic(trace.map((frame: StackFrame) => `\t> ${frame.file}:${frame.lineNumber}`).join('\n'))}`
 		} else {

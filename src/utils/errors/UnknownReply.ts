@@ -1,4 +1,4 @@
-import { CommandInteraction } from 'discord.js'
+import type { CommandInteraction } from 'discord.js'
 
 import { getLocaleFromInteraction, L } from '@/i18n'
 import { BaseError } from '@/utils/classes'

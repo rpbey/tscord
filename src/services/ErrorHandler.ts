@@ -1,7 +1,7 @@
 import process from 'node:process'
 
 import { Service } from '@/decorators'
-import { Logger } from '@/services'
+import type { Logger } from '@/services'
 import { BaseError } from '@/utils/classes'
 
 @Service()

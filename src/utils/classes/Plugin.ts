@@ -2,12 +2,12 @@ import fs from "node:fs";
 import { sep } from "node:path";
 
 import { importx, resolve } from "@rpbey/importer";
-import { AnyEntity, EntityClass } from "@mikro-orm/core";
+import type { AnyEntity, EntityClass } from "@mikro-orm/core";
 import semver from "semver";
-import { BaseTranslation } from "typesafe-i18n";
+import type { BaseTranslation } from "typesafe-i18n";
 
 import { locales } from "@/i18n";
-import { BaseController } from "@/utils/classes";
+import type { BaseController } from "@/utils/classes";
 import { getSourceCodeLocation, getTscordVersion } from "@/utils/functions";
 
 export class Plugin {

@@ -1,4 +1,4 @@
-import { ArgsOf, GuardFunction } from '@rpbey/discordx'
+import type { ArgsOf, GuardFunction } from '@rpbey/discordx'
 
 import { resolveUser } from '@/utils/functions'
 

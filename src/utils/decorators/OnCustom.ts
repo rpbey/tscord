@@ -1,4 +1,5 @@
-import { container, InjectionToken } from 'tsyringe'
+import type { InjectionToken } from 'tsyringe';
+import { container } from 'tsyringe'
 
 import { resolveDependency } from '@/utils/functions'
 

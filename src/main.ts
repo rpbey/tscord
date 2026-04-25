@@ -16,7 +16,7 @@ import {
   tsyringeDependencyRegistryEngine,
 } from "@rpbey/discordx";
 import { container } from "tsyringe";
-import { constructor } from "tsyringe/dist/typings/types";
+import type { constructor } from "tsyringe/dist/typings/types";
 
 import { Server } from "@/api/server";
 import { apiConfig, generalConfig } from "@/configs";

@@ -1,4 +1,4 @@
-import {
+import type {
 	ButtonInteraction,
 	ChatInputCommandInteraction,
 	CommandInteraction,
@@ -11,7 +11,7 @@ import {
 	StringSelectMenuInteraction,
 	VoiceState,
 } from 'discord.js'
-import { SimpleCommandMessage } from '@rpbey/discordx'
+import type { SimpleCommandMessage } from '@rpbey/discordx'
 
 import packageJson from '../../../package.json'
 

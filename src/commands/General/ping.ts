@@ -1,6 +1,6 @@
 import { Category } from '@rpbey/utilities'
-import { CommandInteraction, Message } from 'discord.js'
-import { Client } from '@rpbey/discordx'
+import type { CommandInteraction, Message } from 'discord.js'
+import type { Client } from '@rpbey/discordx'
 
 import { Discord, Slash } from '@/decorators'
 

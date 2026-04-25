@@ -1,10 +1,11 @@
 import { Pagination } from '@rpbey/pagination'
 import { Category } from '@rpbey/utilities'
-import { ApplicationCommandOptionType, CommandInteraction, EmbedBuilder, User } from 'discord.js'
-import { Client } from '@rpbey/discordx'
+import type { CommandInteraction, User } from 'discord.js';
+import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js'
+import type { Client } from '@rpbey/discordx'
 
 import { Discord, Injectable, Slash, SlashOption } from '@/decorators'
-import { Stats } from '@/services'
+import type { Stats } from '@/services'
 import { getColor } from '@/utils/functions'
 
 const statsResolver: StatsResolverType = [

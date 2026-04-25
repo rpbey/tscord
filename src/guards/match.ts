@@ -1,4 +1,4 @@
-import { ArgsOf, GuardFunction } from '@rpbey/discordx'
+import type { ArgsOf, GuardFunction } from '@rpbey/discordx'
 
 /**
  * Pass only when the message match with a passed regular expression

@@ -1,4 +1,5 @@
-import { ApplicationCommandOptions as ApplicationCommandOptionsX, Slash as SlashX, VerifyName } from '@rpbey/discordx'
+import type { ApplicationCommandOptions as ApplicationCommandOptionsX, VerifyName } from '@rpbey/discordx';
+import { Slash as SlashX } from '@rpbey/discordx'
 
 import { constantPreserveDots, sanitizeLocales, setFallbackDescription, setOptionsLocalization } from '@/utils/functions'
 

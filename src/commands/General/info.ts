@@ -1,20 +1,21 @@
 import { Category } from "@rpbey/utilities";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import type {
+  CommandInteraction,
+  EmbedField} from "discord.js";
 import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
-  CommandInteraction,
-  EmbedBuilder,
-  EmbedField,
+  EmbedBuilder
 } from "discord.js";
-import { Client } from "@rpbey/discordx";
+import type { Client } from "@rpbey/discordx";
 
 import { generalConfig } from "@/configs";
 import { Discord, Injectable, Slash } from "@/decorators";
 import { Guard } from "@/guards";
-import { Stats } from "@/services";
+import type { Stats } from "@/services";
 import { getColor, getTscordVersion, isValidUrl, timeAgo } from "@/utils/functions";
 
 import packageJson from "../../../package.json";
