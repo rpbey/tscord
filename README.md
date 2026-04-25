@@ -4,159 +4,138 @@
 
 <div align="center">
 
-[![Latest version](https://img.shields.io/github/v/release/barthofu/tscord?color=4b38ff&label=latest%20version&logo=github&logoColor=white&colorA=4b38ff&style=flat)](https://github.com/barthofu/tscord/releases/latest)
+# tscord — Bun-first fork
 
-[![Build state](https://img.shields.io/github/actions/workflow/status/barthofu/tscord/build.yml?branch=main&colorB=4b38ff&colorA=4b38ff&style=flat)](https://github.com/barthofu/tscord/actions/workflows/build.yml)
-![Repo size](https://img.shields.io/github/repo-size/barthofu/tscord?colorB=4b38ff&colorA=4b38ff&style=flat)
-![Stars count](https://img.shields.io/github/stars/barthofu/tscord?colorB=4b38ff&colorA=4b38ff&style=flat)
+Fork de [`barthofu/tscord`](https://github.com/barthofu/tscord) modernisé pour le runtime [Bun](https://bun.sh).
 
-<table>
-  <tr>
-    <td align="center">
+Maintenu sur [`rpbey/tscord`](https://github.com/rpbey/tscord).
 
-# What is TSCord
+[![Bun](https://img.shields.io/badge/runtime-Bun%201.3+-black?style=flat&logo=bun&logoColor=white)](https://bun.sh)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![discord.js](https://img.shields.io/badge/discord.js-14.26-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.js.org/)
+[![oxlint](https://img.shields.io/badge/lint-oxlint-orange?style=flat)](https://oxc.rs/)
 
-#### **TSCord** is a fully-featured **[discord bot](https://discord.com/developers/docs/intro#bots-and-apps)** *template* written in [Typescript](https://www.typescriptlang.org/), intended to provide a framework that's easy to use, extend and modify.
+</div>
 
-It uses [`discordx`](https://github.com/discordx-ts/discordx) and [`discord.js v14`](https://github.com/discordjs/discord.js) under the hood to simplify the development of discord bots.
+## Pourquoi ce fork
 
-This template was created to give developers a starting point for new Discord bots, so that much of the initial setup can be avoided and developers can instead focus on meaningful bot features. Developers can simply follow the [installation](https://tscord.bartho.dev/docs/bot/get-started/installation) and the [configuration](https://tscord.bartho.dev/docs/bot/get-started/configuration) instructions, and have a working bot with many boilerplate features already included!
-    </td>
-  </tr>
-</table>
+Le template original `barthofu/tscord` cible Node.js. Ce fork :
 
-<table>
-<tr>
-<td align="center">
+- **Runtime Bun-only** (pas de Node, pas de `ts-node`, pas de `tsc` à l'exécution — Bun exécute le TypeScript natif)
+- **`@rpbey/discordy`** au lieu de `discordx` (fork Bun-first du framework de décorateurs)
+- **mikro-orm 6.6+** avec CVE critical SQL Injection résolue (GHSA-gwhv-j974-6fxm)
+- **Lint oxlint** (50–100× plus rapide qu'ESLint, type-aware via `oxlint-tsgolint`)
+- **Docker `oven/bun:1.3-alpine`** (image runtime ~50 Mo, no Node binary)
+- **0 erreur TS, 0 erreur/warning lint** sur l'arbre source
 
-Getting started is as easy as one command
+## Stack
+
+| Couche | Outil |
+|---|---|
+| Runtime | Bun 1.3+ |
+| Framework Discord | `@rpbey/discordx` (workspace) |
+| Lib Discord | `discord.js` 14.26 |
+| ORM | `@mikro-orm/core` 6.6 + sqlite/postgresql/mysql/mariadb |
+| API REST | TSed 7.87 + Express 4.22 |
+| WebSocket | `socket.io` 4.8 |
+| i18n | `typesafe-i18n` |
+| DI | `tsyringe` 4.10 |
+| Lint | `oxlint` 1.61 + `oxlint-tsgolint` (type-aware) |
+
+## Démarrage rapide
 
 ```bash
-npx tscord init bot my-bot
+git clone https://github.com/rpbey/tscord.git my-bot
+cd my-bot
+bun install
+cp .env.example .env  # éditer BOT_TOKEN
+bun run dev           # bun --watch src/main.ts
 ```
 
-**[To know how to use TSCord and all its components, check the documentation here](https://tscord.bartho.dev/)** ㅤ
+## Scripts
 
-</td>
-</tr>
-</table>
+| Script | Description |
+|---|---|
+| `bun run dev` | Watch mode dev (`bun --watch src/main.ts`) |
+| `bun run start` | Production (`bun build/main.js`) |
+| `bun run build` | Compilation TS → `build/` |
+| `bun run lint` | oxlint sans type-aware (~400 ms) |
+| `bun run lint:strict` | oxlint avec type-aware (~700 ms, full coverage) |
+| `bun run lint:fix` | autofix safe |
+| `bun run type:check` | `tsc --noEmit` |
+| `bun run migration:up` | mikro-orm migrations (via `bunx`) |
 
-*But TSCord is not only a Discord bot template...*
+Toutes les commandes mikro-orm passent par `bunx mikro-orm` (Bun runs TS natively, plus besoin de `--loader ts-node/esm`).
 
-<table>
-<tr>
-<td align="center" width="50%">
+## Tsconfig
 
-### [Dashboard](https://github.com/barthofu/tscord-dashboard)
+- `target: ES2022`, `module: ESNext`, `moduleResolution: Bundler`
+- `moduleDetection: force` — chaque fichier ESM
+- `types: ["bun"]` — Bun globals dans la stdlib
+- Path aliases avec `./` prefix (compat tsgolint)
 
-A ready-to-use fancy dashboard for your TSCord bot
+## Lint
 
-<img src="https://user-images.githubusercontent.com/66025667/191989444-5fa096ec-c74e-423d-9735-615b94bc100f.png"></img>
+`.oxlintrc.json` configure 7 plugins :
+- `eslint`, `typescript`, `import`, `oxc`, `promise`, `unicorn`, `node`
+- Categories : `correctness=error`, `suspicious=warn`, `perf=warn`
+- Rules killer : `typescript/no-floating-promises`, `no-misused-promises`, `await-thenable`
+- Overrides : controllers/middlewares (TSed pattern), commands/events (`checksVoidReturn: false` pour discordx)
 
-</td>
-<td align="center">
+Lancer `bun run lint:strict` pour le type-aware mode (via `oxlint-tsgolint`, port Go du compilateur TS).
 
-### [Website](https://github.com/barthofu/tscord-website)
+## Docker
 
-Customizable static homepage for your TSCord-based bot
+```bash
+docker build -t my-bot -f .docker/app/Dockerfile .
+docker run --env-file .env my-bot
+```
 
-https://user-images.githubusercontent.com/66025667/184621486-7340157f-b7fc-44ea-94a9-03d76a99384c.mp4
+Image multi-stage `oven/bun:1.3-alpine` :
+1. **dependencies** : `bun install --frozen-lockfile` + native builds (canvas/sharp)
+2. **builder** : `bun run install:plugins && bun run build`
+3. **prepare** : `bun install --production --frozen-lockfile`
+4. **runner** : `CMD ["bun", "run", "start"]`
 
-</td>
-</tr>
-<tr></tr>
-<tr>
-<td align="center">
+## Différences vs upstream barthofu/tscord
 
-### [CLI](https://github.com/barthofu/tscord-cli)
+| Sujet | barthofu/tscord | rpbey/tscord |
+|---|---|---|
+| Runtime | Node 22 + ts-node | Bun 1.3+ |
+| Decorators framework | `discordx` 11.12 | `@rpbey/discordx` (workspace) |
+| Pkg manager | npm | bun |
+| Linter | eslint | oxlint (50-100× faster) |
+| Lockfile | package-lock.json | bun.lock |
+| `dotenv` | requis | retiré (Bun load `.env` natif) |
+| `__dirname` | CJS-isme | `import.meta.dirname` |
+| mikro-orm | 6.4 (vulnérable) | 6.6.13 (CVE patched) |
+| `cross-env` | requis | retiré (`NODE_ENV=x bun ...`) |
+| `nodemon` | requis | retiré (`bun --watch`) |
 
-Really useful CLI meant to initialize a new TSCord project, generate files by type or even manage plugins
+## Migration depuis upstream
 
-https://user-images.githubusercontent.com/66025667/196367258-94c77e23-779c-4d9b-8583-a29226435b07.mp4
+Si tu as un projet basé sur `barthofu/tscord` et veux passer à ce fork :
 
-</td>
-<td align="center">
+1. **Imports** : `discordx` → `@rpbey/discordx`, `@discordx/*` → `@rpbey/*`
+2. **API breaking** :
+   - `client.parseCommand(prefix, message, false)` → `client.parseCommand(message, false)`
+   - `PaginationType.Button` → option `selectMenu: { disabled: true }`
+3. **Scripts** : voir `package.json` pour les nouvelles formes Bun-natives
+4. **Lockfile** : `rm package-lock.json && bun install`
 
-### [Plugins](https://github.com/barthofu/tscord-plugins)
+## Crédits
 
-Fully extensible thanks to the plugin eco-system
+- Template original : [@barthofu](https://github.com/barthofu) — [tscord](https://github.com/barthofu/tscord)
+- Fork Bun-first : [@aphrody-code](https://github.com/aphrody-code) — [rpbey/tscord](https://github.com/rpbey/tscord)
+- `@rpbey/discordy` : fork Bun-first de [discordx-ts/discordx](https://github.com/discordx-ts/discordx) — [rpbey/discordy](https://github.com/rpbey/discordy)
 
-<img width="50%" src="https://user-images.githubusercontent.com/66025667/196372599-022c6254-01a6-4f7c-bd52-06246527a8b9.png"></img>
+## Documentation upstream
 
-</td>
-</tr>
-</table>
-</div>
+La documentation originale reste pertinente pour la majorité des concepts (architecture, plugins, i18n, schedule, store) :
+**[tscord.bartho.dev](https://tscord.bartho.dev/)**
 
-<br>
+Adapte les commandes `npx`/`npm` en `bunx`/`bun` lors de la lecture.
 
-<div align="center">
-    <a href="https://discord.gg/GsYF4xceZZ" target="_blank">
-        <img width="17.5%" src="https://user-images.githubusercontent.com/66025667/196373934-2fad8760-a58d-4b4d-ad64-b069baa71823.png"></img>
-    </a>
-</div>
+## Licence
 
-## 📜 Features
-
-Talking about features, here are some of the core features of the template:
-
-- Advanced **handlers** for:
-    - Interactions (slash, context menu, button, modal, select menu, etc)
-    - Simple message commands
-    - Discord events listeners
-- **Guards** functions, acting like middlewares on handlers with some built-ins:
-    - Rate limiter
-    - Maintenance mode
-    - Disabling command
-    - Guild only command (no DMs)
-    - NSFW only command
-    - Message's content match using regex
-- Internal **API** to interact with the bot from external services, with built-in useful endpoints
-- Multiple **databases** support out-of-the-box using [Mikro-ORM](https://mikro-orm.io/)
-- **Migrations** system to keep a safe database
-- **Custom events** handlers
-- Advanced **error handler**
-- Fully-typed **localization** (i18n)
-- Local **store** to manage global state through the app
-- Advanced **logger** with log files and discord channels support
-- **Scheduler** for cron jobs
-- Built-in rich **statistics** system
-- Automatic **static assets upload** to [imgur](https://imgur.com/)
-
-This template is also developer friendly and follow strict design patterns to ease its maintenance:
-- Written in **Typescript**
-- Built around the **Dependency Injection** and **Singleton** patterns
-- **HMR** on events and commands for a faster development
-- Use of battle-tested **libraries** under the hood (*discordx* and *discord.js*)
-- **Linting** and **formatting** thanks to a top-notch ESLint config
-- Typesafe and validated **environment variables**
-- Built-in **debugging** setup for VSCode
-- Support for running with the **[PM2](https://pm2.keymetrics.io/)** process manger
-- Support for running with **[Docker](https://www.docker.com/)**
-- CI/CD integration with **Github Actions**
-
-*and many more!*
-
-## 📚 Documentation
-
-### Check the [**official documentation**](https://tscord.bartho.dev/) to get started and understand how to use this template.
-
-You can also find useful documentations at:
-- [discordx documentation](https://discordx.js.org/)
-- [Discord.js Guide](https://discordjs.guide/)
-- [Discord's developer portal](https://discord.com/developers/docs/intro)
-
-## 📢 Support
-
-If you need support on the template or just want to exchange with us, don't hesitate to join the **[official Discord support server](https://discord.gg/GsYF4xceZZ)**!
-
-## Roadmap
-
-We use Github milestones for
-#### [Click here](https://github.com/barthofu/tscord-template/milestones?direction=asc&sort=title&state=open) to access the milestone roadmap
-
-## 📑 License
-
-MIT License
-
-Copyright (c) barthofu
+MIT — voir [LICENSE](./LICENSE).
